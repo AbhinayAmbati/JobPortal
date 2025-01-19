@@ -13,11 +13,11 @@ Make sure you have the following installed on your machine:
 ### Installation
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/job-portal.git
+   git clone https://github.com/AbhinayAmbati/JobPortal.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd job-portal
+   cd client
    ```
 3. Install dependencies:
    ```bash
@@ -80,6 +80,11 @@ Installation
    spring.jpa.hibernate.ddl-auto=update
 
 Running the Application
+
+Navigate to the project directory:
+   ```bash
+   cd backend
+   ```
 
 Development Mode:
    ```bash
