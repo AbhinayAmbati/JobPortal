@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { FaUser, FaEnvelope, FaEyeSlash, FaEye, FaLock } from 'react-icons/fa';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [username, setUserName] = useState('');
@@ -40,11 +41,11 @@ const SignUp = () => {
     try {
       const response = await axios.post('http://localhost:8080/api/user/signup', userData); 
       console.log('Registration successful:', response.data)
-      alert('Registration successful. Please sign in.');
+      toast.success('Registration successful. Please sign in.');
       navigate('/sign-in');
     } catch (error) {
       console.error('Registration failed:', error.response.data);
-      alert('Registration failed. Please try again.');
+      toast.error('Registration failed. Please try again.');
     }
   };
 

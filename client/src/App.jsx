@@ -8,11 +8,14 @@ import ProtectedLoginRoute from "./contexts/ProtectedLoginRoute";
 import ProtectedRegisterRoute from "./contexts/ProtectedRegisterRoute";
 import Home from "./components/Home";
 import ProtectedRoute from "./contexts/ProtectedRoute";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
     <AppProvider>
       <Router>
+        <ToastContainer/>
       <Routes>
         <Route path="/job-portal" element={<LandingPage />} />
         <Route path="/sign-in" element={

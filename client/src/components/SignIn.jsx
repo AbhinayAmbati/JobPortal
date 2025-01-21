@@ -6,6 +6,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
+import {toast} from "react-toastify"
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +14,6 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { setUser, setUsername } = useAppContext(); 
-
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -43,10 +43,11 @@ const SignIn = () => {
       setUsername(user.username);
       Cookies.set("token", response.data.jwtToken);
       Cookies.set("username", user.username);
+      toast.success("User logged in successfully.");
       navigate("/", { replace: true });
     } catch (error) {
       console.error("Login failed:", error.response.data);
-      alert("Login failed. Please check your credentials and try again.");
+      toast.error("Login Failed");
     }
   };
 
