@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import ProtectedRoute from "./contexts/ProtectedRoute";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Profile from "./components/Profile";
 
 const App = () => {
   return (
@@ -31,6 +32,9 @@ const App = () => {
           } />
           <Route path="/" element={
             <ProtectedRoute><Home /></ProtectedRoute>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute><Profile /></ProtectedRoute>
           } />
       </Routes>
     </Router>

@@ -43,6 +43,7 @@ const SignIn = () => {
       setUsername(user.username);
       Cookies.set("token", response.data.jwtToken);
       Cookies.set("username", user.username);
+      Cookies.set("sid", user.id);
       toast.success("User logged in successfully.");
       navigate("/", { replace: true });
     } catch (error) {
