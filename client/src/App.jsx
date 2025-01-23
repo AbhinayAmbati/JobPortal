@@ -11,6 +11,7 @@ import ProtectedRoute from "./contexts/ProtectedRoute";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Profile from "./components/Profile";
+import EditProfile from "./components/EditProfile";
 
 const App = () => {
   return (
@@ -35,6 +36,9 @@ const App = () => {
           } />
           <Route path="/profile" element={
             <ProtectedRoute><Profile /></ProtectedRoute>
+          } />
+          <Route path="/edit-profile" element={
+            <ProtectedRoute><EditProfile /></ProtectedRoute>
           } />
       </Routes>
     </Router>
