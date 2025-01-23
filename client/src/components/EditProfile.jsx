@@ -55,7 +55,7 @@ const EditProfile = () => {
         params : {id},
       });
       setUser(response.data);
-      toast.success('Profile updated successfully.');
+      toast.success('Profile updated successfully');
       navigate('/profile'); 
     } catch (error) {
       console.error('Error updating profile:', error);
