@@ -60,7 +60,11 @@ const Profile = () => {
             </div>
           </div>
           <div className="mt-6 text-center">
-            <Link to="/edit-profile" className="text-blue-600 hover:underline">Edit Profile</Link>
+            <Link to="/edit-profile" className="text-blue-600 hover:underline"><button
+              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-300"
+            >
+              Edit Profile
+            </button></Link>
           </div>
         </div>
       </div>

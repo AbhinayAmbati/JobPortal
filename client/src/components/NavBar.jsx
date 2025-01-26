@@ -14,7 +14,7 @@ const NavBar = () => {
       Cookies.remove('token');
       window.location.href = '/sign-in';
     } catch (error) {
-      console.error('Logout error:', error);
+      console.error('Logout error :', error);
     }
   };
 
