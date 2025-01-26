@@ -4,7 +4,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import profileimage from "../assets/userPhoto.png";
 import loadingIcon from "../assets/Rolling@1x-1.0s-200px-200px.gif";
 
 const EditProfile = () => {
@@ -90,11 +89,17 @@ const EditProfile = () => {
           <h1 className="text-3xl font-bold text-center mb-6">Edit Profile</h1>
           <form className="space-y-4" onSubmit={handleUpdateProfile}>
             <div className="flex flex-col items-center mb-4">
+            {user.profileimage ? (
               <img
-                src={user.profileimage || profileimage}
+                src={user.profileimage}
                 alt="Profile"
                 className="h-32 w-32 rounded-full border-2 border-blue-600 mb-4"
               />
+            ) : (
+              <div className="h-32 w-32 flex items-center justify-center rounded-full border-2 border-blue-600 mb-4 bg-blue-200 text-blue-600 text-4xl font-bold">
+                {user.username.charAt(0).toUpperCase()}
+              </div>
+            )}
               <input
                 type="file"
                 accept="image/*"

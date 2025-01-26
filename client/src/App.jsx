@@ -20,7 +20,7 @@ const App = () => {
       <Router>
         <ToastContainer/>
       <Routes>
-        <Route path="/job-portal" element={<LandingPage />} />
+        <Route path="/job-portal" element={<ProtectedRegisterRoute><LandingPage /></ProtectedRegisterRoute>} />
         <Route path="/sign-in" element={
           <ProtectedLoginRoute>
             <SignIn />

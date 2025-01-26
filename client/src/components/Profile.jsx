@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
-import userprofile from "../assets/userPhoto.png";
 import loadingIcon from "../assets/Rolling@1x-1.0s-200px-200px.gif"
 
 const Profile = () => {
@@ -43,11 +42,17 @@ const Profile = () => {
         <div className="bg-white shadow-lg rounded-lg p-8 w-96">
           <h1 className="text-3xl font-bold text-center mb-6">Profile</h1>
           <div className="flex flex-col items-center mb-4">
-            <img 
-              src={user.profileimage || userprofile} 
-              alt="Profile"
-              className="h-32 w-32 rounded-full border-2 border-blue-600 mb-4"
-            />
+            {user.profileimage ? (
+              <img
+                src={user.profileimage}
+                alt="Profile"
+                className="h-32 w-32 rounded-full border-2 border-blue-600 mb-4"
+              />
+            ) : (
+              <div className="h-32 w-32 flex items-center justify-center rounded-full border-2 border-blue-600 mb-4 bg-blue-200 text-blue-600 text-6xl font-bold">
+                {user.username.charAt(0).toUpperCase()}
+              </div>
+            )}
             <div className="space-y-4 text-center">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Name</label>
