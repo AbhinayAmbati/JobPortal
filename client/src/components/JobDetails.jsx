@@ -63,13 +63,12 @@ const JobDetails = () => {
           </p>
           <p className="text-gray-800 mb-4 flex items-center">
             <CgDetailsMore className="mr-2 text-gray-600" />
-            Descripiton: {job.jobDescription}
+            Description: {job.jobDescription}
           </p>
           <p className="text-gray-800 mb-4 flex items-center">
             <FaDollarSign className="mr-2 text-gray-600" />
             Salary: {job.jobSalaryRange}
           </p>
-          
           <p className="text-gray-800 mb-4 flex items-center">
             <FaBusinessTime className="mr-2 text-gray-600" />
             Experience: {job.jobRequirements}

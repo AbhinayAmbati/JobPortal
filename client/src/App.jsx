@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import JobDetails from "./components/JobDetails";
+import CompanyDetails from "./components/CompanyDetails";
 
 const App = () => {
   return (
@@ -43,6 +44,9 @@ const App = () => {
           } />
           <Route path="/job/:id" element={
             <ProtectedRoute><JobDetails /></ProtectedRoute>
+          } />
+          <Route path="/companies" element={
+            <ProtectedRoute><CompanyDetails /></ProtectedRoute>
           } />
       </Routes>
     </Router>

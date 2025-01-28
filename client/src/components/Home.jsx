@@ -35,11 +35,11 @@ const Home = () => {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="flex flex-col pt-20 items-center justify-center min-h-screen bg-gray-100 p-4">
         <h1 className="text-5xl font-bold text-blue-600 mb-4">Welcome to the Job Finder Portal</h1>
         <p className="text-lg text-gray-700 mb-6">Find your dream job with ease. Search, apply, and get hired!</p>
 
-        <div className="relative mb-6 w-full max-w-md">
+        <div className=" mb-6 w-full max-w-md">
           <input
             type="text"
             placeholder="Search jobs..."
