@@ -36,7 +36,7 @@ const Home = () => {
     <>
       <NavBar />
       <div className="flex flex-col pt-20 items-center justify-center min-h-screen bg-gray-100 p-4">
-        <h1 className="text-5xl font-bold text-blue-600 mb-4">Welcome to the Job Finder Portal</h1>
+        <h1 className="text-3xl md:text-5xl font-bold text-blue-600 mb-4 text-center">Welcome to the Job Finder Portal</h1>
         <p className="text-lg text-gray-700 mb-6">Find your dream job with ease. Search, apply, and get hired!</p>
 
         <div className=" mb-6 w-full max-w-md">
