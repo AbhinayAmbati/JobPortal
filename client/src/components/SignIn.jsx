@@ -6,14 +6,15 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { setUser, setUsername } = useAppContext(); 
+  const { setUser, setUsername } = useAppContext();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -21,6 +22,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const userData = {
       email,
@@ -33,12 +35,7 @@ const SignIn = () => {
         userData
       );
       console.log("Login successful:", response.data);
-      const { jwtToken, user } = response.data;
-      console.log(
-        jwtToken,
-        "\nEmail " + user.email,
-        "\nUsername " + user.username
-      );
+      const { user } = response.data;
       setUser(true);
       setUsername(user.username);
       Cookies.set("token", response.data.jwtToken);
@@ -49,6 +46,8 @@ const SignIn = () => {
     } catch (error) {
       console.error("Login failed:", error.response.data);
       toast.error("Login Failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -110,11 +109,19 @@ const SignIn = () => {
               </div>
             </div>
             <button
+              className="w-full  bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-300"
+              disabled={loading}
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-300"
             >
-              Sign In
+              {loading ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white justify-self-center border-t-transparent rounded-full animate-spin"></div>
+                </>
+              ) : (
+                "Sign In"
+              )}
             </button>
+
             <Link to="/forgot-password">
               <h5 className="text-blue-600 mt-2 text-center">
                 Forgot Password?
