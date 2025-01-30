@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
-import loadingIcon from "../assets/Rolling@1x-1.0s-200px-200px.gif"
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -28,7 +27,7 @@ const Profile = () => {
   }, []);
 
   if (loading) {
-    return <img src={loadingIcon} height="10px" width="10px"/>;
+    return <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>;
   }
 
   if (!user) {
