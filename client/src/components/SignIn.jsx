@@ -138,7 +138,7 @@ const SignIn = () => {
             </button>
 
             <Link to="/forgot-password">
-              <h5 className="text-blue-600 mt-2 text-center">
+              <h5 className="text-blue-600 mt-2 text-center hover:underline">
                 Forgot Password?
               </h5>
             </Link>

@@ -14,7 +14,7 @@ const NavBar = () => {
       Cookies.remove('username');
       Cookies.remove('token');
       Cookies.remove('sid');
-      window.location.href = '/sign-in';
+      window.location.href = '/job-portal';
     } catch (error) {
       console.error('Logout error :', error);
     }
