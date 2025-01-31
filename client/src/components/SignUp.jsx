@@ -5,6 +5,7 @@ import { FaUser, FaEnvelope, FaEyeSlash, FaEye, FaLock } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import globe from "../assets/globe.mp4"
 
 const SignUp = () => {
   const [username, setUserName] = useState("");
@@ -27,7 +28,6 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
@@ -58,10 +58,25 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen overflow-hidden relative">
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline
+        className="absolute mt-5 z-0 w-full h-full object-cover"
+      >
+        <source 
+          src={globe} 
+          type="video/mp4" 
+        />
+        Your browser does not support the video tag.
+      </video>
+
+
       <NavBar />
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white shadow-lg rounded-lg p-8 w-96">
+      <div className="relative z-20 flex items-center justify-center min-h-screen">
+        <div className="bg-white bg-opacity-90 shadow-lg rounded-lg p-8 w-96 relative">
           <h1 className="text-3xl font-bold text-center mb-6">Register</h1>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="relative">
@@ -187,7 +202,7 @@ const SignUp = () => {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

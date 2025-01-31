@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 import { toast } from "react-toastify";
+import globe from "../assets/globe.mp4"
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -52,10 +53,24 @@ const SignIn = () => {
   };
 
   return (
-    <>
+    <div className="relative min-h-screen overflow-hidden">
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline
+        className="absolute mt-5 z-0 w-full h-full object-cover"
+      >
+        <source 
+          src={globe} 
+          type="video/mp4" 
+        />
+        Your browser does not support the video tag.
+      </video>
+
       <NavBar />
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white shadow-lg rounded-lg p-8 w-96">
+      <div className="relative z-20 flex items-center justify-center min-h-screen">
+        <div className="bg-white bg-opacity-90 shadow-lg rounded-lg p-8 w-96 relative">
           <h1 className="text-3xl font-bold text-center mb-6">Sign In</h1>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="relative">
@@ -109,7 +124,7 @@ const SignIn = () => {
               </div>
             </div>
             <button
-              className="w-full  bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-300"
+              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-300"
               disabled={loading}
               type="submit"
             >
@@ -137,7 +152,7 @@ const SignIn = () => {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
