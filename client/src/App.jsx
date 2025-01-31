@@ -14,6 +14,7 @@ import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import JobDetails from "./components/JobDetails";
 import CompanyDetails from "./components/CompanyDetails";
+import Jobs from "./components/Jobs";
 
 const App = () => {
   return (
@@ -41,6 +42,9 @@ const App = () => {
           } />
           <Route path="/edit-profile" element={
             <ProtectedRoute><EditProfile /></ProtectedRoute>
+          } />
+          <Route path="/jobs" element={
+            <ProtectedRoute><Jobs /></ProtectedRoute>
           } />
           <Route path="/job/:id" element={
             <ProtectedRoute><JobDetails /></ProtectedRoute>
