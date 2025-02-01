@@ -1,4 +1,5 @@
 import NavBar from "./NavBar";
+import { Building2, MapPin, Globe } from 'lucide-react';
 
 const CompanyDetails = () => {
   const companies = [
@@ -40,31 +41,63 @@ const CompanyDetails = () => {
   ];
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <NavBar />
-      <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100 p-4 pt-20">
-        <h1 className="text-4xl font-bold text-blue-600 mb-4">Company Listings</h1>
-        <p className="text-lg text-gray-700 mb-6">Explore companies and their offerings.</p>
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center mt-20 mb-12">
+          <h1 className="text-4xl h-14 md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
+            Company Listings
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Explore innovative companies and discover exciting career opportunities.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {companies.map((company) => (
-            <div key={company.id} className="bg-white shadow-lg rounded-lg p-6  transition ">
-              <h3 className="text-xl font-semibold text-blue-600">{company.name}</h3>
-              <p className="text-gray-700 mt-2">{company.description}</p>
-              <p className="text-gray-500 mt-2">Location: {company.location}</p>
-              <a
-                href={company.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-block bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-              >
-                Visit Website
-              </a>
+            <div 
+              key={company.id} 
+              className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden transform hover:-translate-y-1"
+            >
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <Building2 className="h-6 w-6 text-blue-500 mr-2" />
+                  <h3 className="text-xl font-bold text-gray-800">{company.name}</h3>
+                </div>
+                <p className="text-gray-600 mb-4 line-clamp-2">{company.description}</p>
+                <div className="space-y-3">
+                  <p className="flex items-center text-gray-600">
+                    <MapPin className="h-4 w-4 mr-2 text-blue-500" />
+                    {company.location}
+                  </p>
+                  <p className="flex items-center text-gray-600">
+                    <Globe className="h-4 w-4 mr-2 text-blue-500" />
+                    <a 
+                      href={company.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-700 hover:underline"
+                    >
+                      {company.website.replace('https://', '')}
+                    </a>
+                  </p>
+                </div>
+                <div className="mt-6">
+                  <a
+                    href={company.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2.5 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                  >
+                    Visit Website
+                  </a>
+                </div>
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
