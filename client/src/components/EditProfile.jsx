@@ -42,15 +42,17 @@ const EditProfile = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData();
     if (newProfileImage) {
       formData.append("image", newProfileImage);
     }
-
+    formData.append("email", email);
+    formData.append("username", username);
+  
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/user/update/image`,
+        `http://localhost:8080/api/user/update`,
         formData,
         {
           headers: {

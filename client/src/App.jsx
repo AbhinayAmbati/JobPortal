@@ -15,6 +15,7 @@ import EditProfile from "./components/EditProfile";
 import JobDetails from "./components/JobDetails";
 import CompanyDetails from "./components/CompanyDetails";
 import Jobs from "./components/Jobs";
+import ResetPassword from "./components/ResetPassword";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <SignIn />
             </ProtectedLoginRoute>
           } />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/sign-up" element={
           <ProtectedRegisterRoute><SignUp /></ProtectedRegisterRoute>
           } />
