@@ -11,7 +11,6 @@ import ProtectedRoute from "./contexts/ProtectedRoute";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Profile from "./components/Profile";
-import EditProfile from "./components/EditProfile";
 import JobDetails from "./components/JobDetails";
 import CompanyDetails from "./components/CompanyDetails";
 import Jobs from "./components/Jobs";
@@ -41,9 +40,6 @@ const App = () => {
           } />
           <Route path="/profile" element={
             <ProtectedRoute><Profile /></ProtectedRoute>
-          } />
-          <Route path="/edit-profile" element={
-            <ProtectedRoute><EditProfile /></ProtectedRoute>
           } />
           <Route path="/jobs" element={
             <ProtectedRoute><Jobs /></ProtectedRoute>

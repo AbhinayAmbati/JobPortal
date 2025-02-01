@@ -31,6 +31,9 @@ const Profile = () => {
   const [portfolio, setPortfolio] = useState('');
   const [github, setGithub] = useState('');
   const [linkedin, setLinkedin] = useState('');
+  const [username, setUsername] = useState('');
+  const [profileImage, setProfileImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -40,6 +43,15 @@ const Profile = () => {
           params: { id }
         });
         setUser(response.data);
+        setUsername(response.data.username || '');
+        setCurrentPosition(response.data.currentPosition || '');
+        setLocation(response.data.location || '');
+        setEducation(response.data.education || '');
+        setPhone(response.data.phone || '');
+        setPortfolio(response.data.portfolioUrl || '');
+        setGithub(response.data.gitHubUrl || '');
+        setLinkedin(response.data.linkedInUrl || '');
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
         toast.error('Failed to load profile data');
@@ -51,6 +63,18 @@ const Profile = () => {
     fetchUserData();
   }, []);
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfileImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const userData = {
     currentPosition,
     location,
@@ -58,25 +82,43 @@ const Profile = () => {
     phone,
     portfolio,
     github,
-    linkedin
+    linkedin,
+    username
   }
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const id = Cookies.get('sid');
     try {
-      const response = await axios.put(`http://localhost:8080/api/user/user-info`,
-        userData,
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('currentPosition', currentPosition);
+      formData.append('location', location);
+      formData.append('education', education);
+      formData.append('phone', phone);
+      formData.append('portfolio', portfolio);
+      formData.append('github', github);
+      formData.append('linkedin', linkedin);
+      
+      if (profileImage) {
+        formData.append('image', profileImage);
+      }
+
+      const response = await axios.put(
+        `http://localhost:8080/api/user/update`,
+        formData,
         {
-          params: { id }
+          params: { id },
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         }
       );
-      window.location.reload();
+      
       setUser(response.data);
-      console.log(response.data);
       setIsEditing(false);
       toast.success('Profile updated successfully');
+      window.location.reload();
     } catch (error) {
       console.error('Error updating profile:', error);
       toast.error('Failed to update profile');
@@ -112,16 +154,37 @@ const Profile = () => {
             <div className="px-8 pb-8">
               <div className="relative">
                 <div className="-mt-16 mb-4">
-                  {user.profileimage ? (
-                    <img
-                      src={user.profileimage}
-                      alt="Profile"
-                      className="h-32 w-32 rounded-full border-4 border-white shadow-lg"
-                    />
-                  ) : (
-                    <div className="h-32 w-32 flex items-center justify-center rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white text-6xl font-bold">
-                      {user?.username?.charAt(0).toUpperCase()}
+                  {isEditing ? (
+                    <div className="relative">
+                      <div className="h-32 w-32 rounded-full border-4 border-white shadow-lg overflow-hidden">
+                        <img
+                          src={imagePreview || user?.profileimage || `https://ui-avatars.com/api/?name=${user?.username}&background=0D8ABC&color=fff`}
+                          alt="Profile Preview"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <label className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-lg cursor-pointer">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          className="hidden"
+                        />
+                        <Edit3 className="h-5 w-5 text-blue-600" />
+                      </label>
                     </div>
+                  ) : (
+                    user?.profileimage ? (
+                      <img
+                        src={user.profileimage}
+                        alt="Profile"
+                        className="h-32 w-32 rounded-full border-4 border-white shadow-lg object-cover"
+                      />
+                    ) : (
+                      <div className="h-32 w-32 flex items-center justify-center rounded-full border-4 border-white shadow-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white text-6xl font-bold">
+                        {user?.username?.charAt(0).toUpperCase()}
+                      </div>
+                    )
                   )}
                 </div>
 
@@ -157,6 +220,17 @@ const Profile = () => {
                 {isEditing ? (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="block text-sm font-medium text-gray-700">Username</label>
+                        <input
+                          type="text"
+                          name="username"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                          className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500"
+                          placeholder="Enter your username"
+                        />
+                      </div>
                       <div className="space-y-2">
                         <label className="block text-sm font-medium text-gray-700">Current Position</label>
                         <input
@@ -307,9 +381,9 @@ const Profile = () => {
                     <div className="pt-6 border-t border-gray-200">
                       <h3 className="text-lg font-semibold text-gray-800 mb-4">Connect with me</h3>
                       <div className="flex space-x-4">
-                        {user.githubUrl && (
+                        {user.gitHubUrl && (
                           <a 
-                            href={user.githubUrl}
+                            href={user.gitHubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition-colors duration-300"
@@ -318,9 +392,9 @@ const Profile = () => {
                             <Github className="h-5 w-5 text-gray-700" />
                           </a>
                         )}
-                        {user.linkedinUrl && (
+                        {user.linkedInUrl && (
                           <a 
-                            href={user.linkedinUrl}
+                            href={user.linkedInUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition-colors duration-300"
