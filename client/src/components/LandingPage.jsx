@@ -1,4 +1,4 @@
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaMapMarkerAlt, FaDollarSign } from 'react-icons/fa';
 import NavBar from './NavBarOut';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -34,55 +34,103 @@ const LandingPage = () => {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col pt-20 items-center justify-center min-h-screen bg-gray-100">
-        <div className="text-center mb-10">
-          <h1 className="text-5xl font-bold text-blue-600 mb-4">Welcome to the Job Finder Portal</h1>
-          <p className="text-lg text-gray-700 mb-6">Find your dream job with ease. Search, apply, and get hired!</p>
-          <div className="flex justify-center mb-4">
-            <input 
-              type="text" 
-              placeholder="Search for jobs..." 
-              className="p-3 border border-gray-300 rounded-l w-1/2"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-r hover:bg-blue-700 transition duration-300">
-              <FaSearch />
-            </button>
+      <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+        {/* Hero Section */}
+        <div className="container mx-auto px-4 pt-20">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h1 className="text-6xl font-bold mb-6 text-gray-800">
+              Find Your <span className="text-blue-600">Dream Job</span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-10">
+              Discover your next career opportunity with ease
+            </p>
+            <div className="relative max-w-2xl mx-auto">
+              <input 
+                type="text" 
+                placeholder="Search jobs..." 
+                className="w-full px-6 py-4 text-lg rounded-full border-2 border-gray-200 
+                focus:outline-none focus:border-blue-500 transition-all duration-300
+                shadow-sm hover:shadow-md"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button className="absolute right-3 top-1/2 transform -translate-y-1/2 
+              bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 
+              transition-all duration-300">
+                <FaSearch className="text-xl" />
+              </button>
+            </div>
           </div>
         </div>
-        <h2 className="text-3xl font-semibold mb-4">Job Listings</h2>
-        {loading ? (
-          <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
-            {displayedJobs.length > 0 ? (
-              displayedJobs.map((job) => (
-                <div key={job.jobId} className="bg-white shadow-md rounded-lg p-6 transition hover:shadow-lg">
-                  <h3 className="text-xl font-semibold text-blue-600">{job.jobName}</h3>
-                  <p className="text-gray-700 mt-2">{job.jobDescription.substring(0, 100)}...</p>
-                  <p className="text-gray-500 mt-2">Location: {job.jobLocation}</p>
-                  <p className="text-gray-800 mt-2">Salary: {job.jobSalaryRange}</p>
-                  <div className="mt-4">
-                    <a
-                      href={`/job/${job.jobId}`}
-                      className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-                    >
-                      View Details
-                    </a>
+
+        {/* Job Listings */}
+        <div className="container mx-auto px-4 pb-20">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+            Featured <span className="text-blue-600">Opportunities</span>
+          </h2>
+          
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="w-16 h-16 border-4 border-blue-100 border-t-blue-600 
+              rounded-full animate-spin"></div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {displayedJobs.length > 0 ? (
+                displayedJobs.map((job) => (
+                  <div key={job.jobId} 
+                    className="bg-white rounded-xl p-6 transition-all duration-300 
+                    hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] group">
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold text-gray-800 mb-2 
+                      group-hover:text-blue-600 transition-colors duration-300">
+                        {job.jobName}
+                      </h3>
+                      <p className="text-gray-600 line-clamp-2 mb-4">
+                        {job.jobDescription}
+                      </p>
+                      <div className="space-y-2 mb-6">
+                        <div className="flex items-center text-gray-600">
+                          <FaMapMarkerAlt className="text-blue-600 mr-2" />
+                          {job.jobLocation}
+                        </div>
+                        <div className="flex items-center text-gray-600">
+                          <FaDollarSign className="text-blue-600 mr-2" />
+                          {job.jobSalaryRange}
+                        </div>
+                      </div>
+                      <a
+                        href={`/job/${job.jobId}`}
+                        className="inline-block w-full text-center py-3 rounded-lg 
+                        border-2 border-blue-600 text-blue-600 font-medium
+                        hover:bg-blue-600 hover:text-white transition-all duration-300"
+                      >
+                        View Details
+                      </a>
+                    </div>
                   </div>
+                ))
+              ) : (
+                <div className="col-span-3 text-center py-20">
+                  <p className="text-xl text-gray-600">
+                    No jobs available at the moment.
+                  </p>
                 </div>
-              ))
-            ) : (
-              <div className="py-2 text-center">No jobs available.</div>
-            )}
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Simple Footer */}
+        <div className="bg-white py-12">
+          <div className="container mx-auto px-4 text-center">
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">
+              Ready to Start Your <span className="text-blue-600">Journey</span>?
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Join thousands of professionals who have already found their perfect career match through our platform.
+            </p>
           </div>
-        )}
-        <div className="mt-6">
-          <h3 className="text-2xl font-semibold mb-2">Why Choose Us?</h3>
-          <p className="text-gray-700 mb-4">
-            We connect you with top employers and provide resources to help you succeed in your job search.
-          </p>
         </div>
       </div>
     </>

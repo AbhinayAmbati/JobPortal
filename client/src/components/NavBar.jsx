@@ -29,101 +29,136 @@ const NavBar = () => {
   };
 
   return (
-    <div className="flex fixed w-full items-center justify-between p-4 bg-blue-600 text-white shadow-md z-50">
-      <div className="flex items-center">
-        <Link to="/">
-          <img src={logo} alt="Job Portal Logo" className="h-10 w-30 mr-2" />
-        </Link>
-        <h1 className="text-xl font-semibold">Job Portal</h1>
-      </div>
+    <nav className="fixed w-full top-0 z-50">
+      <div className="bg-white bg-opacity-70 backdrop-blur-lg border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo and Brand */}
+            <div className="flex items-center">
+              <Link to="/" className="flex items-center space-x-2">
+                <img src={logo} alt="Job Portal Logo" className="h-8 w-auto" />
+                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+                  Job Portal
+                </span>
+              </Link>
+            </div>
 
-      <div className="hidden md:flex space-x-4 items-center">
-        <Link to="/">
-          <button className="hover:bg-blue-500 px-3 py-2 flex rounded items-center gap-1 transition duration-300">
-            <FaHome /> Home
-          </button>
-        </Link>
-        <Link to="/jobs">
-          <button className="hover:bg-blue-500 px-3 py-2 flex items-center gap-1 rounded transition duration-300">
-            <FaBriefcase /> Jobs
-          </button>
-        </Link>
-        <Link to="/companies">
-          <button className="hover:bg-blue-500 px-3 py-2 items-center gap-1 flex rounded transition duration-300">
-            <FaUser /> Companies
-          </button>
-        </Link>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-1">
+              <Link to="/">
+                <button className="px-4 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 
+                flex items-center space-x-2 transition-all duration-300">
+                  <FaHome className="text-blue-600" />
+                  <span>Home</span>
+                </button>
+              </Link>
+              <Link to="/jobs">
+                <button className="px-4 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 
+                flex items-center space-x-2 transition-all duration-300">
+                  <FaBriefcase className="text-blue-600" />
+                  <span>Jobs</span>
+                </button>
+              </Link>
+              <Link to="/companies">
+                <button className="px-4 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 
+                flex items-center space-x-2 transition-all duration-300">
+                  <FaUser className="text-blue-600" />
+                  <span>Companies</span>
+                </button>
+              </Link>
 
-        {/* User Dropdown */}
-        <div className="relative">
-          <button
-            onClick={toggleDropdown}
-            className="flex items-center hover:bg-blue-500 px-3 py-2 rounded transition duration-300"
-          >
-            <FaUserCircle className="mr-2" /> {username}
-          </button>
-          {dropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg z-10">
+              {/* User Profile Dropdown */}
+              <div className="relative ml-2">
+                <button
+                  onClick={toggleDropdown}
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-700 
+                  hover:bg-blue-50 hover:text-blue-600 transition-all duration-300"
+                >
+                  <FaUserCircle className="text-blue-600 text-xl" />
+                  <span>{username}</span>
+                </button>
+                
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 
+                  overflow-hidden transform origin-top-right transition-all duration-200">
+                    <Link to="/profile">
+                      <button className="flex items-center space-x-2 w-full px-4 py-3 text-gray-700 
+                      hover:bg-gray-50 transition-colors duration-200">
+                        <FaUser className="text-blue-600" />
+                        <span>Profile</span>
+                      </button>
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center space-x-2 w-full px-4 py-3 text-red-600 
+                      hover:bg-red-50 transition-colors duration-200"
+                    >
+                      <FaSignOutAlt />
+                      <span>Logout</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button
+                onClick={toggleMobileMenu}
+                className="p-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 
+                transition-all duration-300"
+              >
+                <FaBars className="h-6 w-6" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-100">
+            <div className="max-w-7xl mx-auto py-2 space-y-1">
+              <Link to="/">
+                <button className="flex items-center space-x-2 w-full px-4 py-3 text-gray-700 
+                hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">
+                  <FaHome className="text-blue-600" />
+                  <span>Home</span>
+                </button>
+              </Link>
+              <Link to="/jobs">
+                <button className="flex items-center space-x-2 w-full px-4 py-3 text-gray-700 
+                hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">
+                  <FaBriefcase className="text-blue-600" />
+                  <span>Jobs</span>
+                </button>
+              </Link>
+              <Link to="/companies">
+                <button className="flex items-center space-x-2 w-full px-4 py-3 text-gray-700 
+                hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">
+                  <FaUser className="text-blue-600" />
+                  <span>Companies</span>
+                </button>
+              </Link>
               <Link to="/profile">
-                <button className="flex items-center gap-1 px-4 py-2 text-sm hover:bg-gray-200 w-full text-left">
-                  <FaUser /> Profile
+                <button className="flex items-center space-x-2 w-full px-4 py-3 text-gray-700 
+                hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">
+                  <FaUserCircle className="text-blue-600" />
+                  <span>Profile</span>
                 </button>
               </Link>
               <button
                 onClick={handleLogout}
-                className="flex text-red-600 items-center gap-1 px-4 py-2 text-sm hover:bg-gray-200 w-full text-left"
+                className="flex items-center space-x-2 w-full px-4 py-3 text-red-600 
+                hover:bg-red-50 transition-all duration-200"
               >
-                <FaSignOutAlt /> Logout
+                <FaSignOutAlt />
+                <span>Logout</span>
               </button>
             </div>
-          )}
-        </div>
-      </div>
-
-      {/* Mobile Menu Button */}
-      <div className="md:hidden">
-        <button
-          onClick={toggleMobileMenu}
-          className="flex items-center hover:bg-blue-500 px-3 py-2 rounded transition duration-300"
-        >
-          <FaBars className="mr-2" /> Menu
-        </button>
-      </div>
-
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-16 right-0 w-full bg-blue-600 text-white shadow-md z-40">
-          <div className="flex flex-col space-y-2 p-4">
-            <Link to="/">
-              <button className="flex items-center gap-1 px-4 py-2 text-sm hover:bg-blue-500 w-full text-left">
-                <FaHome /> Home
-              </button>
-            </Link>
-            <Link to="/jobs">
-              <button className="flex items-center gap-1 px-4 py-2 text-sm hover:bg-blue-500 w-full text-left">
-                <FaBriefcase /> Jobs
-              </button>
-            </Link>
-            <Link to="/companies">
-              <button className="flex items-center gap-1 px-4 py-2 text-sm hover:bg-blue-500 w-full text-left">
-                <FaUser /> Companies
-              </button>
-            </Link>
-            <Link to="/profile">
-              <button className="flex items-center gap-1 px-4 py-2 text-sm hover:bg-blue-500 w-full text-left">
-                <FaUser /> Profile
-              </button>
-            </Link>
-            <button
-              onClick={handleLogout}
-              className="flex text-red-300 items-center gap-1 px-4 py-2 text-sm hover:bg-blue-500 w-full text-left"
-            >
-              <FaSignOutAlt /> Logout
-            </button>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </nav>
   );
 };
 

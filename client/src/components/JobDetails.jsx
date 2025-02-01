@@ -13,6 +13,7 @@ import {
   GraduationCap,
   ExternalLink
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -125,15 +126,15 @@ const JobDetails = () => {
               </div>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <a
-                  href={job.applyLink}
+                <Link 
+                  to={`${job.jobApplyLink}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center justify-center"
                 >
                   Apply Now
                   <ExternalLink className="h-5 w-5 ml-2" />
-                </a>
+                </Link>
                 <button
                   onClick={() => window.history.back()}
                   className="flex-1 bg-gray-100 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-200 transition-all duration-300 text-center font-medium"

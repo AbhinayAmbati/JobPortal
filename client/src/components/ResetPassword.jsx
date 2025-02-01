@@ -50,12 +50,9 @@ const ResetPassword = () => {
 
   if (!isTokenValid) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="text-xl font-semibold text-gray-700 flex items-center">
-          <svg className="animate-spin h-6 w-6 mr-3" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-          </svg>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div className="text-xl font-semibold text-gray-700 flex items-center bg-white p-6 rounded-xl shadow-lg">
+          <div className="w-6 h-6 border-3 border-blue-600 border-t-transparent rounded-full animate-spin mr-3"></div>
           Verifying reset link...
         </div>
       </div>
@@ -65,64 +62,91 @@ const ResetPassword = () => {
   return (
     <>
     <NavBar/>
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-  <div className="flex items-center gap-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100 w-[42rem]">
-    <div className="w-1/2">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Reset Password</h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label className="block text-md font-medium text-gray-700 mb-1">New Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-            minLength={6}
-            placeholder="Enter your new password"
-          />
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+      <div className="flex items-center gap-8 bg-white p-8 rounded-2xl shadow-2xl w-[42rem] mx-4">
+        <div className="w-1/2">
+          <h2 className="text-3xl font-bold mb-4 text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+            Reset Password
+          </h2>
+          <p className="text-center text-gray-600 mb-6">
+            Please enter your new password below
+          </p>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="mt-1 p-3 w-full border-2 border-gray-200 rounded-lg 
+                  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                  transition-all duration-300 bg-gray-50 hover:bg-white"
+                  required
+                  minLength={6}
+                  placeholder="Enter your new password"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="mt-1 p-3 w-full border-2 border-gray-200 rounded-lg 
+                  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                  transition-all duration-300 bg-gray-50 hover:bg-white"
+                  required
+                  minLength={6}
+                  placeholder="Confirm your new password"
+                />
+              </div>
+            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 
+              rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 
+              font-medium text-lg shadow-md hover:shadow-lg disabled:opacity-70 
+              disabled:cursor-not-allowed flex items-center justify-center"
+            >
+              {isLoading ? (
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              ) : (
+                'Reset Password'
+              )}
+            </button>
+          </form>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-            minLength={6}
-            placeholder="Confirm your new password"
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-300"
-        >
-          {isLoading ? (
-            <span className="flex items-center justify-center">
-              <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-              </svg>
-              Resetting...
-            </span>
-          ) : (
-            'Reset Password'
-          )}
-        </button>
-      </form>
-    </div>
 
-    {/* GIF Section */}
-    <img
-      src={resetGif}
-      alt="Reset Password GIF"
-      className="w-1/2 rounded-lg"
-    />
-  </div>
-</div>
-</>
+        <div className="w-1/2 flex items-center justify-center p-4">
+          <img
+            src={resetGif}
+            alt="Reset Password Illustration"
+            className="w-full h-auto object-contain animate-float rounded-lg"
+            style={{
+              animation: 'float 6s ease-in-out infinite'
+            }}
+          />
+        </div>
+      </div>
+    </div>
+    <style>
+      {`
+        @keyframes float {
+          0% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+          100% {
+            transform: translateY(0px);
+          }
+        }
+      `}
+    </style>
+    </>
   );
 };
 

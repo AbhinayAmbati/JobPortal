@@ -17,7 +17,8 @@ const Jobs = () => {
     jobSalaryRange: '',
     jobType: '',
     jobRequirements: '',
-    jobContactEMail: ''
+    jobContactEMail: '',
+    jobApplyLink: ''
   });
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const Jobs = () => {
       try {
         const response = await axios.get(`http://localhost:8080/api/user/job/all-jobs`);
         setJobs(response.data);
+        console.log(response.data);
       } catch (error) {
         toast.error('Failed to fetch jobs');
         console.error('Error fetching jobs:', error);
@@ -45,7 +47,19 @@ const Jobs = () => {
   const handleSubmitJob = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/user/job/create', newJob);
+      const jobData = {
+        jobName: newJob.jobName,
+        jobDescription: newJob.jobDescription,
+        jobCompanyName: newJob.jobCompanyName,
+        jobLocation: newJob.jobLocation,
+        jobSalaryRange: newJob.jobSalaryRange,
+        jobType: newJob.jobType,
+        jobRequirements: newJob.jobRequirements,
+        jobContactEMail: newJob.jobContactEMail,
+        jobApplyLink: newJob.jobApplyLink
+      };
+
+      const response = await axios.post('http://localhost:8080/api/user/job/create', jobData);
       setJobs(prev => [...prev, response.data]);
       toast.success('Job posted successfully');
       setShowForm(false);
@@ -57,7 +71,8 @@ const Jobs = () => {
         jobSalaryRange: '',
         jobType: '',
         jobRequirements: '',
-        jobContactEMail: ''
+        jobContactEMail: '',
+        jobApplyLink: ''
       });
     } catch (error) {
       toast.error('Failed to post job');
@@ -214,6 +229,17 @@ const Jobs = () => {
                   placeholder="List the required skills, experience, and qualifications..."
                   className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
                   rows="4"
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">Apply Link</label>
+                <textarea
+                  name="jobApplyLink"
+                  value={newJob.jobApplyLink}
+                  onChange={handleInputChange}
+                  placeholder="e.g., https://example.com/apply"
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300"
                   required
                 />
               </div>

@@ -95,14 +95,14 @@ const Home = () => {
                         View Details
                       </button>
                     </Link>
-                    <a 
-                      href={job.applyLink} 
+                    <Link
+                      to={`${job.jobApplyLink}`} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="block w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-2.5 rounded-lg hover:from-green-700 hover:to-green-800 transition duration-300 text-center font-medium"
                     >
                       Apply Now
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
