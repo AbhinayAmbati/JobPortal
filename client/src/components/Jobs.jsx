@@ -47,19 +47,7 @@ const Jobs = () => {
   const handleSubmitJob = async (e) => {
     e.preventDefault();
     try {
-      const jobData = {
-        jobName: newJob.jobName,
-        jobDescription: newJob.jobDescription,
-        jobCompanyName: newJob.jobCompanyName,
-        jobLocation: newJob.jobLocation,
-        jobSalaryRange: newJob.jobSalaryRange,
-        jobType: newJob.jobType,
-        jobRequirements: newJob.jobRequirements,
-        jobContactEMail: newJob.jobContactEMail,
-        jobApplyLink: newJob.jobApplyLink
-      };
-
-      const response = await axios.post('http://localhost:8080/api/user/job/create', jobData);
+      const response = await axios.post('http://localhost:8080/api/user/job/create', newJob);
       setJobs(prev => [...prev, response.data]);
       toast.success('Job posted successfully');
       setShowForm(false);
