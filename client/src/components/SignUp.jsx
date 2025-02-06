@@ -5,7 +5,6 @@ import { FaEye, FaEyeSlash, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import globe from "../assets/globe.mp4";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
