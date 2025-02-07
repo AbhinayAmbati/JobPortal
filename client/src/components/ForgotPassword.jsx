@@ -20,7 +20,7 @@ const ForgotPassword = () => {
       );
       console.log("Reset link sent:", response.data);
       toast.success(
-        "A password reset link has been sent to your email address."
+        "A password reset link has been sent to your email address"
       );
       setEmail("");
     } catch (error) {
