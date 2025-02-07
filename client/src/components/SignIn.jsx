@@ -46,7 +46,7 @@ const SignIn = () => {
       navigate("/", { replace: true });
     } catch (error) {
       console.error("Login failed:", error.response.data);
-      toast.error("Login Failed");
+      toast.error(error.response.data);
     } finally {
       setLoading(false);
     }
