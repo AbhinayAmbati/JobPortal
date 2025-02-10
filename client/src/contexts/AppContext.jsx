@@ -13,17 +13,18 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     const jwtToken = async () => {
-      try {
-        const response = await axios.post("http://localhost:8080/api/user/jwt-token", {
-          email: Cookies.get("email"),
-        });
-        Cookies.set("token", response.data);
-        console.log("Token refreshed:", response.data);
-      } catch (error) {
-        console.error("Error refreshing token:", error);
-      }
-    };
-
+      if(user){
+        try {
+          const response = await axios.post("http://localhost:8080/api/user/jwt-token", {
+            email: Cookies.get("email"),
+          });
+          Cookies.set("token", response.data);
+          console.log("Token refreshed:", response.data);
+        } catch (error) {
+          console.error("Error refreshing token:", error);
+        }
+      };
+      };
       // Run jwtToken every 1 second
   const intervalId = setInterval(jwtToken, 1000);
 
