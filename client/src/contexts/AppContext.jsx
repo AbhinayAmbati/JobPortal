@@ -31,6 +31,7 @@ export const AppProvider = ({ children }) => {
   // Cleanup the interval when the component unmounts
   return () => clearInterval(intervalId);
   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); 
 
   const [username, setUsername] = useState(() => {
