@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 const AppContext = createContext();
 
@@ -9,6 +10,27 @@ export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     return Boolean(Cookies.get("token")); 
   });
+
+  useEffect(() => {
+    const jwtToken = async () => {
+      try {
+        const response = await axios.post("http://localhost:8080/api/user/jwt-token", {
+          email: Cookies.get("email"),
+        });
+        Cookies.set("token", response.data);
+        console.log("Token refreshed:", response.data);
+      } catch (error) {
+        console.error("Error refreshing token:", error);
+      }
+    };
+
+      // Run jwtToken every 1 second
+  const intervalId = setInterval(jwtToken, 1000);
+
+  // Cleanup the interval when the component unmounts
+  return () => clearInterval(intervalId);
+  
+  }, []); 
 
   const [username, setUsername] = useState(() => {
     return Cookies.get("username") || '';

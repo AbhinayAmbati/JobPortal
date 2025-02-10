@@ -7,7 +7,6 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 import { toast } from "react-toastify";
-import globe from "../assets/globe.mp4"
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -41,6 +40,7 @@ const SignIn = () => {
       setUsername(user.username);
       Cookies.set("token", response.data.jwtToken);
       Cookies.set("username", user.username);
+      Cookies.set("email", user.email);
       Cookies.set("sid", user.id);
       toast.success("User logged in successfully.");
       navigate("/", { replace: true });
