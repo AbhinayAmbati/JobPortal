@@ -42,7 +42,7 @@ const ForgotPassword = () => {
                 Forgot Password?
               </h1>
               <p className="text-center mb-6 text-gray-600">
-                Don't worry! It happens. Please enter your email address below to receive a password reset link.
+                Don&apos;t worry! It happens. Please enter your email address below to receive a password reset link.
               </p>
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="relative group">

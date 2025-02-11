@@ -28,7 +28,6 @@ export const AppProvider = ({ children }) => {
       // Run jwtToken every 1 second
   const intervalId = setInterval(jwtToken, 1000);
 
-  // Cleanup the interval when the component unmounts
   return () => clearInterval(intervalId);
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
