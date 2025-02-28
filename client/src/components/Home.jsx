@@ -15,7 +15,7 @@ const Home = () => {
         const response = await axios.get('http://localhost:8080/api/user/job/all-jobs'); 
         setJobs(response.data);
       } catch (error) {
-        console.error('Error fetching jobs:', error);
+        console.error('Error fetching jobs: ', error);
       } finally {
         setLoading(false);
       }
