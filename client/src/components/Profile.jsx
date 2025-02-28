@@ -40,7 +40,10 @@ const Profile = () => {
       const id = Cookies.get('sid');
       try {
         const response = await axios.get('http://localhost:8080/api/user/profile', {
-          params: { id }
+          params: { id },
+          headers:{
+            Authorization: `Bearer ${Cookies.get('token')}`
+          }
         });
         setUser(response.data);
         setUsername(response.data.username || '');
@@ -75,6 +78,7 @@ const Profile = () => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const userData = {
     currentPosition,
     location,
