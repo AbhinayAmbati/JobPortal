@@ -25,7 +25,7 @@ export const AppProvider = ({ children }) => {
   //       }
   //     };
   //     };
-  //     // Run jwtToken every 1 second
+  //     // Run jwtToken every 1 second .
   // const intervalId = setInterval(jwtToken, 1000);
 
   // return () => clearInterval(intervalId);
