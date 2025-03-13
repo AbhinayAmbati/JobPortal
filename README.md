@@ -11,7 +11,7 @@ Make sure you have the following installed on your machine:
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
 ### Installation
-1. Clone this repository:
+1. Clone this repository :
    ```bash
    git clone https://github.com/AbhinayAmbati/JobPortal.git
    ```
